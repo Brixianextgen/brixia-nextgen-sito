@@ -86,7 +86,9 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;backgroun
 .board{background:var(--board);color:var(--board-fg);border-radius:6px;padding:18px 22px 18px;position:relative;overflow:hidden;min-width:0}
 .board-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;opacity:.7;text-transform:uppercase}
 .count{display:flex;align-items:baseline;gap:12px;margin:8px 0 16px}
-.board-logo{display:block;width:100%;height:auto;margin:6px 0 2px}
+.board-logos{display:flex;align-items:center;gap:clamp(10px,2vw,18px);margin:6px 0 2px}
+.board-logo{display:block;flex:1 1 auto;min-width:0;width:100%;height:auto}
+.board-wa{display:block;flex:0 0 auto;width:30%;max-width:150px;height:auto;padding-left:clamp(10px,2vw,18px);border-left:1px solid rgba(245,247,251,.18)}
 .count b{font-family:var(--display);font-style:italic;font-weight:900;font-size:clamp(72px,9vw,118px);line-height:.85;color:var(--cta)}
 .count span{font-family:var(--display);font-style:italic;font-weight:800;font-size:26px;text-transform:uppercase;line-height:1}
 .lanes{display:grid;gap:5px}
@@ -425,7 +427,10 @@ footer strong{color:var(--fg);font-weight:600}
 
       <aside class="board" aria-label="Brixia Next Gen 2027">
         <div class="board-top"><span>Brixen / Bressanone</span><span class="num">30.05.2027</span></div>
-        <img class="board-logo" alt="Brixia Next Gen" width="1000" height="525" src="img/brixia-logo.jpg">
+        <div class="board-logos">
+          <img class="board-logo" alt="Brixia Next Gen" width="1000" height="525" src="img/brixia-logo.jpg">
+          <img class="board-wa" alt="World Athletics" width="300" height="292" src="img/logo-world-athletics.png">
+        </div>
         <div class="clock" role="timer" aria-live="off" aria-label="Countdown">
           <div class="cell"><b id="c-d">234</b><small data-i18n="cd.d">giorni</small></div>
           <div class="cell"><b id="c-h">21</b><small data-i18n="cd.h">ore</small></div>
