@@ -1,0 +1,39 @@
+name: Aggiorna record italiani U18
+
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+  push:
+    paths:
+      - update_records.py
+      - .github/workflows/aggiorna-record.yml
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Scarica i record da Wikipedia
+        run: python3 update_records.py
+      - name: Salva e pubblica se ci sono novità
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git add record-italiani.json
+          if git diff --cached --quiet; then
+            echo "Nessuna novità"
+          else
+            git commit -m "Aggiorna record italiani U18 da Wikipedia"
+            git push
+            gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
+          fi
