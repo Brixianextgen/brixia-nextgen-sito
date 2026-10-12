@@ -84,6 +84,10 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;backgroun
 .hero .wrap>*{min-width:0}
 .orgs{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:28px}
 .orgs span{flex-basis:100%;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+a.logo-tile,.orgs a{position:relative}
+a.logo-tile::after,.orgs a::after{content:"";position:absolute;top:6px;right:6px;width:20px;height:20px;border-radius:50%;background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M9 7h8v8'/%3E%3C/svg%3E") center/12px 12px no-repeat;box-shadow:0 1px 3px rgba(10,23,48,.25);opacity:.9;transition:opacity .2s ease,transform .16s cubic-bezier(.23,1,.32,1)}
+a.logo-tile:hover::after,.orgs a:hover::after{opacity:1;transform:scale(1.12)}
+.orgs a::after{top:4px;right:4px;width:18px;height:18px;background-size:11px 11px}
 a.logo-tile{transition:transform .16s cubic-bezier(.23,1,.32,1),box-shadow .2s ease}
 a.logo-tile:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(10,23,48,.18)}
 a.logo-tile:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
