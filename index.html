@@ -494,10 +494,10 @@ footer strong{color:var(--fg);font-weight:600}
           <svg viewBox="0 0 320 150" aria-hidden="true">
             <rect x="8" y="8" width="304" height="134" rx="67" class="l-out"/>
             <rect x="26" y="26" width="268" height="98" rx="49" class="l-in"/>
-            <path id="lap-path" d="M160 133 H245 A58 58 0 0 0 245 17 H75 A58 58 0 0 0 75 133 Z" class="l-mid"/>
-            <path id="lap-done" d="M160 133 H245 A58 58 0 0 0 245 17 H75 A58 58 0 0 0 75 133 Z" class="l-done"/>
-            <line x1="160" y1="126" x2="160" y2="140" class="l-finish"/>
-            <circle id="lap-dot" r="7" cx="160" cy="133" class="l-dot"/>
+            <path id="lap-path" d="M245 133 A58 58 0 0 0 245 17 H75 A58 58 0 0 0 75 133 Z" class="l-mid"/>
+            <path id="lap-done" d="M245 133 A58 58 0 0 0 245 17 H75 A58 58 0 0 0 75 133 Z" class="l-done"/>
+            <line x1="245" y1="126" x2="245" y2="140" class="l-finish"/>
+            <circle id="lap-dot" r="7" cx="245" cy="133" class="l-dot"/>
             <text x="160" y="66" text-anchor="middle" class="l-big" id="lap-m">142 m</text>
             <text x="160" y="90" text-anchor="middle" class="l-small" data-i18n="lap.of">su 400</text>
           </svg>
@@ -1006,13 +1006,17 @@ footer strong{color:var(--fg);font-weight:600}
   var RACE=Date.UTC(2027,4,30,7,0,0), PREV=Date.UTC(2026,4,31,7,0,0);
   var lp=document.getElementById("lap-path"), ld=document.getElementById("lap-done"), dot=document.getElementById("lap-dot"), L=lp.getTotalLength();
   ld.style.strokeDasharray=L; 
+  /* metri reali -> lunghezza sul disegno: curva 115,61 m, rettilineo 84,39 m (partenza a inizio prima curva) */
+  var SC=Math.PI*58, SS=170;
+  function trackLen(m){var C=115.61,S=84.39,seg=[[C,SC],[S,SS],[C,SC],[S,SS]],out=0;
+    for(var i=0;i<4;i++){if(m<=seg[i][0])return out+m/seg[i][0]*seg[i][1];m-=seg[i][0];out+=seg[i][1];}return L;}
   function pad(n){return (n<10?"0":"")+n;}
   function setv(id,v){var el=document.getElementById(id);if(el.textContent!==v){el.textContent=v;el.classList.remove("tick");void el.offsetWidth;el.classList.add("tick");}}
   function tickClock(){
     var now=Date.now(), ms=Math.max(0,RACE-now), t=Math.floor(ms/1000);
     setv("c-d",String(Math.floor(t/86400)));setv("c-h",pad(Math.floor(t%86400/3600)));setv("c-m",pad(Math.floor(t%3600/60)));setv("c-s",pad(t%60));
-    var f=Math.min(1,Math.max(0,(now-PREV)/(RACE-PREV))), pt=lp.getPointAtLength(f*L);
-    ld.style.strokeDashoffset=L*(1-f); dot.setAttribute("cx",pt.x.toFixed(1)); dot.setAttribute("cy",pt.y.toFixed(1));
+    var f=Math.min(1,Math.max(0,(now-PREV)/(RACE-PREV))), pt=lp.getPointAtLength(trackLen(f*400));
+    ld.style.strokeDashoffset=L-trackLen(f*400); dot.setAttribute("cx",pt.x.toFixed(1)); dot.setAttribute("cy",pt.y.toFixed(1));
     document.getElementById("lap-m").textContent=Math.round(f*400)+" m";
   }
   tickClock(); setInterval(tickClock,1000);
