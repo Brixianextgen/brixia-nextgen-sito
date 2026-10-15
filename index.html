@@ -121,6 +121,12 @@ a.logo-tile:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .count{display:flex;align-items:baseline;gap:12px;margin:8px 0 16px}
 .board-logos{display:flex;align-items:center;gap:clamp(10px,2vw,18px);margin:6px 0 2px}
 .board-logo{display:block;flex:1 1 auto;min-width:0;width:100%;height:auto}
+.board-partners{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border-radius:6px;padding:8px 12px;margin:10px 0 4px}
+.board-partners a{display:block;line-height:0;transition:transform .16s cubic-bezier(.23,1,.32,1)}
+.board-partners a:hover{transform:translateY(-1px)}
+.board-partners img{height:clamp(34px,4vw,48px);width:auto;display:block}
+.board-partners a:first-child img{height:clamp(30px,3.4vw,42px)}
+.board-partners a+a{padding-left:10px;border-left:1px solid #E3E7EE}
 .board-wa{display:block;flex:0 0 auto;width:30%;max-width:150px;height:auto;padding-left:clamp(10px,2vw,18px);border-left:1px solid rgba(245,247,251,.18)}
 .count b{font-family:var(--display);font-style:italic;font-weight:900;font-size:clamp(72px,9vw,118px);line-height:.85;color:var(--cta)}
 .count span{font-family:var(--display);font-style:italic;font-weight:800;font-size:26px;text-transform:uppercase;line-height:1}
@@ -563,6 +569,11 @@ footer strong{color:var(--fg);font-weight:600}
         <div class="board-logos">
           <img class="board-logo" alt="Brixia Next Gen" width="1000" height="525" src="img/brixia-logo.jpg">
           <img class="board-wa" alt="World Athletics" width="300" height="292" src="img/logo-world-athletics.png">
+        </div>
+        <div class="board-partners">
+          <a href="https://www.brixen.it/" target="_blank" rel="noopener" title="Città di Bressanone / Stadtgemeinde Brixen"><img src="img/logo-bressanone.png" alt="Città di Bressanone / Stadtgemeinde Brixen" width="428" height="120"></a>
+          <a href="https://altoadige.fidal.it/" target="_blank" rel="noopener" title="FIDAL Alto Adige / Südtirol"><img src="img/org-fidal-altoadige.jpg" alt="FIDAL Comitato Regionale Alto Adige / Südtirol" width="400" height="393"></a>
+          <a href="https://www.sg-eisacktal.it/" target="_blank" rel="noopener" title="SG Eisacktal Raiffeisen"><img src="img/org-sg-eisacktal.jpg" alt="SG Eisacktal Raiffeisen" width="225" height="225"></a>
         </div>
         <div class="clock" role="timer" aria-live="off" aria-label="Countdown">
           <div class="cell"><b id="c-d">234</b><small data-i18n="cd.d">giorni</small></div>
