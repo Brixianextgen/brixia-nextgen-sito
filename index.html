@@ -146,12 +146,12 @@ a.logo-tile:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 @keyframes tick{from{transform:translateY(-35%);opacity:.2;filter:blur(2px)}to{transform:none;opacity:1;filter:none}}
 .cell small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.65}
 .lap svg{width:100%;height:auto;display:block}
-.l-out{fill:#B63A22}.l-in{fill:#0E2A4F}
-.l-mid{fill:none;stroke:rgba(245,247,251,.25);stroke-width:2;stroke-dasharray:4 6}
+.l-out{fill:#8DC48B;stroke:rgba(255,255,255,.9);stroke-width:1.5}.l-in{fill:url(#lap-grass);stroke:#FFFFFF;stroke-width:1.5}
+.l-mid{fill:none;stroke:rgba(255,255,255,.75);stroke-width:1.5;stroke-dasharray:4 6}
 .l-done{fill:none;stroke:var(--cta);stroke-width:5;stroke-linecap:round}
 .l-finish{stroke:#F5F7FB;stroke-width:3}
 .l-dot{fill:#F5F7FB;stroke:#0A1730;stroke-width:3}
-.l-big{font-family:var(--display);font-style:italic;font-weight:900;font-size:34px;fill:#F5F7FB}
+.l-big{font-family:var(--display);font-style:italic;font-weight:900;font-size:34px;fill:#F5F7FB;paint-order:stroke;stroke:rgba(20,50,10,.35);stroke-width:3px}
 .l-small{font-family:var(--body);font-size:12px;letter-spacing:.12em;text-transform:uppercase;fill:rgba(245,247,251,.7)}
 .lap-cap{font-size:13px;opacity:.72;margin-top:10px;line-height:1.45}
 .prog-bar{display:grid;gap:8px;margin-top:4px}
@@ -597,6 +597,7 @@ section[id]{scroll-margin-top:108px}
         </div>
         <div class="lap">
           <svg viewBox="0 0 320 150" aria-hidden="true">
+            <defs><pattern id="lap-grass" width="28" height="150" patternUnits="userSpaceOnUse"><rect width="14" height="150" fill="#4F9A24"/><rect x="14" width="14" height="150" fill="#5AA62D"/></pattern></defs>
             <rect x="8" y="8" width="304" height="134" rx="67" class="l-out"/>
             <rect x="26" y="26" width="268" height="98" rx="49" class="l-in"/>
             <path id="lap-path" d="M245 133 A58 58 0 0 0 245 17 H75 A58 58 0 0 0 75 133 Z" class="l-mid"/>
