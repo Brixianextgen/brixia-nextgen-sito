@@ -518,11 +518,25 @@ footer strong{color:var(--fg);font-weight:600}
 .ck-x:hover{opacity:1}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+/* intestazione su due righe: loghi in alto, menu sotto */
+.nav .wrap{flex-wrap:wrap;height:auto;padding-block:10px 0;row-gap:4px}
+.nav .lang{margin-left:auto}
+.nav nav{order:3;width:100%;margin-left:0;gap:26px;padding:6px 0 12px}
+.nav-logos{display:flex;align-items:center;gap:8px;flex:none;padding-left:16px;border-left:1px solid var(--line)}
+.nav-logos a{display:block;background:#fff;border-radius:6px;padding:3px 6px;line-height:0;box-shadow:0 0 0 1px rgba(10,23,48,.08);transition:transform .16s cubic-bezier(.23,1,.32,1)}
+.nav-logos a:hover{transform:translateY(-1px)}
+.nav-logos img{height:40px;width:auto;display:block}
+.rs-tools{top:112px}
+section[id]{scroll-margin-top:108px}
+@media (max-width:1020px){.rs-tools{top:104px}}
+@media (max-width:520px){.nav .wrap{column-gap:10px}.brand img{height:34px}.nav-logos{padding-left:8px;gap:4px}.nav-logos a{padding:2px 3px}.nav-logos img{height:24px}.nav .lang button{padding:7px 7px;font-size:12px}.rs-tools{top:96px}}
+@media (max-width:370px){.nav-logos a:first-child{display:none}}
 </style>
 
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Brixia Next Gen, home"><img src="img/brixia-logo-nav.jpg" alt="Brixia Next Gen" width="360" height="182"></a>
+    <div class="nav-logos"><a href="https://www.brixen.it/" target="_blank" rel="noopener" title="Città di Bressanone / Stadtgemeinde Brixen"><img src="img/logo-bressanone.png" alt="Città di Bressanone / Stadtgemeinde Brixen" width="428" height="120"></a><a href="https://altoadige.fidal.it/" target="_blank" rel="noopener" title="FIDAL Alto Adige / Südtirol"><img src="img/org-fidal-altoadige.jpg" alt="FIDAL Comitato Regionale Alto Adige / Südtirol" width="400" height="393"></a><a href="https://www.sg-eisacktal.it/" target="_blank" rel="noopener" title="SG Eisacktal Raiffeisen"><img src="img/org-sg-eisacktal.jpg" alt="SG Eisacktal Raiffeisen" width="225" height="225"></a></div>
     <nav aria-label="Sezioni" id="mainnav">
       <a href="#programma" data-i18n="nav.prog">Programma</a>
       <a href="#info" data-i18n="nav.info">Info</a>
