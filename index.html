@@ -332,6 +332,20 @@ background:linear-gradient(90deg,rgba(5,8,15,.92) 0%,rgba(10,37,82,.72) 45%,rgba
 .filter button{font:600 14px/1 var(--body);padding:10px 14px;border:0;background:transparent;color:var(--muted);cursor:pointer}
 .filter button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
 .tt-wrap{overflow-x:auto;border-top:1px solid var(--fg)}
+.tt2{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));border-top:2px solid var(--fg)}
+.tt2 .slot{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:start;align-content:start;padding:9px 12px 9px 0;border-bottom:1px solid var(--line)}
+.tt2 time{font:700 14px/26px var(--mono);font-variant-numeric:tabular-nums}
+.tt2 .evs{display:flex;flex-wrap:wrap;gap:5px}
+.ev{display:inline-flex;align-items:center;gap:6px;font-size:13px;line-height:1;padding:5px 5px 5px 9px;border-radius:999px;border:1px solid var(--line);background:var(--surface);white-space:nowrap}
+.ev.ph-b{background:color-mix(in srgb,var(--accent) 10%,var(--surface));border-color:color-mix(in srgb,var(--accent) 30%,transparent)}
+.ev.ph-q{border-style:dashed}
+.ev.ph-f,.ev.ph-c,.ev.ph-r{background:var(--cta);border-color:var(--cta);color:#0A1730;font-weight:700}
+.ev .sx{font:700 10px/1 var(--mono);padding:3px 5px;border-radius:999px;color:#fff;background:#6B778C}
+.sx.m{background:#1652B0}.sx.f{background:#E0457B}.sx.mf{background:#5B4BB7}
+.tt2-leg{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:14px;font-size:13px;color:var(--muted)}
+.tt2-leg .ev{padding-right:9px;color:var(--fg)}.tt2-leg .ev.ph-f{color:#0A1730}
+.tt2-leg .lg-sx{display:inline-flex;align-items:center;gap:6px}.tt2-leg .sx{font:700 10px/1 var(--mono);padding:3px 5px;border-radius:999px;color:#fff}
+@media (max-width:560px){.tt2{grid-template-columns:1fr 1fr;column-gap:10px}.tt2 .slot{grid-template-columns:1fr;gap:5px;padding:8px 0}.tt2 time{line-height:1.2;font-size:13px}.ev{font-size:12px;padding:4px 4px 4px 7px;gap:4px}.ev .sx{font-size:9px;padding:2px 4px}}
 .tt{width:100%;border-collapse:collapse;font-size:15px;min-width:0}
 .tt th{text-align:left;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:12px 12px 10px 0}
 .tt td{padding:11px 12px 11px 0;border-top:1px solid var(--line);vertical-align:baseline}
@@ -729,12 +743,8 @@ section[id]{scroll-margin-top:108px}
           <button type="button" id="f-f" data-f="F" aria-pressed="false" data-i18n="tt.f">Ragazze</button>
         </div>
       </div>
-      <div class="tt-wrap">
-        <table class="tt">
-          <thead><tr><th data-i18n="tt.time">Ora</th><th data-i18n="tt.event">Gara</th><th>M/F</th><th data-i18n="tt.phase">Fase</th></tr></thead>
-          <tbody id="tt-body"></tbody>
-        </table>
-      </div>
+      <div class="tt2" id="tt-body"></div>
+      <div class="tt2-leg" id="tt-leg"></div>
     </div>
   </section>
 
@@ -1238,8 +1248,9 @@ section[id]{scroll-margin-top:108px}
   function renderProg(){
     var i=LI[cur],t=T[cur];
     Object.keys(CH).forEach(function(k){document.getElementById("chips-"+k).innerHTML=CH[k].map(function(e){var n=EV[e][i];if(e==="h100")n+=" (F)";if(e==="h110")n+=" (M)";return "<span>"+n+"</span>";}).join("");});
-    var h="";TT.forEach(function(r){if(flt!=="all"&&r[2].indexOf(flt)<0)return;h+='<tr'+(r[3]==="f"||r[3]==="r"||r[3]==="c"?' class="key"':'')+'><td>'+r[0]+'</td><td>'+EV[r[1]][i]+'</td><td class="sx">'+r[2]+'</td><td class="ph">'+t["ph."+r[3]]+'</td></tr>';});
-    document.getElementById("tt-body").innerHTML=h;
+    var g=[],last=null;TT.forEach(function(r){if(flt!=="all"&&r[2].indexOf(flt)<0)return;if(!last||last.t!==r[0]){last={t:r[0],e:[]};g.push(last);}last.e.push(r);});
+    document.getElementById("tt-body").innerHTML=g.map(function(s){return '<div class="slot"><time>'+s.t+'</time><div class="evs">'+s.e.map(function(r){var sx=r[2]==="M/F"?"mf":r[2].toLowerCase();return '<span class="ev ph-'+r[3]+'" title="'+esc(t["ph."+r[3]])+'">'+EV[r[1]][i]+'<b class="sx '+sx+'">'+r[2]+'</b></span>';}).join("")+'</div></div>';}).join("");
+    document.getElementById("tt-leg").innerHTML=["b","q","f"].map(function(k){return '<span class="ev ph-'+k+'">'+esc(t["ph."+k])+'</span>';}).join("")+'<span class="lg-sx"><b class="sx m">M</b> '+esc(t["tt.m"])+'</span><span class="lg-sx"><b class="sx f">F</b> '+esc(t["tt.f"])+'</span>';
   }
   document.querySelectorAll(".filter button").forEach(function(b){b.addEventListener("click",function(){flt=b.dataset.f;document.querySelectorAll(".filter button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false");});renderProg();});});
 
