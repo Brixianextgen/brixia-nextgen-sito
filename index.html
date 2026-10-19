@@ -67,6 +67,10 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;backgroun
 .lang{display:flex;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
 .lang button{font:600 13px/1 var(--body);letter-spacing:.06em;padding:8px 10px;border:0;background:transparent;color:var(--muted);cursor:pointer}
 .lang button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.lang button{display:inline-flex;align-items:center;gap:6px}
+.lang .flag{width:18px;height:12px;border-radius:2px;flex:0 0 auto;box-shadow:0 0 0 1px rgba(10,23,48,.18);display:block}
+.lang button[aria-pressed="true"] .flag{box-shadow:0 0 0 1px rgba(255,255,255,.55)}
+@media (max-width:520px){.lang .flag{width:15px;height:10px}.lang button{gap:4px}}
 .btn{display:inline-flex;align-items:center;gap:10px;font:600 16px/1 var(--body);padding:15px 22px;border-radius:var(--radius);border:1px solid transparent;text-decoration:none;cursor:pointer;white-space:nowrap;transition:transform .16s cubic-bezier(.23,1,.32,1),background-color .2s ease}
 .btn:active{transform:scale(.97)}
 .btn-primary{background:var(--cta);color:var(--cta-ink);font-weight:700}
@@ -644,9 +648,9 @@ section[id]{scroll-margin-top:108px}
       <a href="#partecipa" data-i18n="nav.join">Partecipa</a>
     </nav>
     <div class="lang" role="group" aria-label="Lingua / Sprache / Language">
-      <button type="button" id="lang-it" data-lang="it" aria-pressed="true">IT</button>
-      <button type="button" id="lang-de" data-lang="de" aria-pressed="false">DE</button>
-      <button type="button" id="lang-en" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" id="lang-it" data-lang="it" aria-pressed="true"><svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#CE2B37"/></svg><span class="lc">IT</span></button>
+      <button type="button" id="lang-de" data-lang="de" aria-pressed="false"><svg class="flag" viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="1" fill="#000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg><span class="lc">DE</span></button>
+      <button type="button" id="lang-en" data-lang="en" aria-pressed="false"><svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="fgb"><path d="M30,15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath><path d="M0,0v30h60v-30z" fill="#012169"/><path d="M0,0 60,30M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30M60,0 0,30" clip-path="url(#fgb)" stroke="#C8102E" stroke-width="4"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></svg><span class="lc">EN</span></button>
     </div>
   </div>
 </header>
